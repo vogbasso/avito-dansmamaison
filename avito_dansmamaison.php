@@ -5,4 +5,5 @@
  */
 require('models/avito_product.php');
 require('mysql/mysql_config.php');
+require('json/json_config.php');
 ?>

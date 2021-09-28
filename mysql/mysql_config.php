@@ -8,7 +8,7 @@ $dbused = 'dansmamaison_live';
 try{
 
     $conn = new PDO("mysql:host=$servername;dbname=$dbused",$username,$password);
-    
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "succès dans la connection";
 
 }catch(PDOException $e){
