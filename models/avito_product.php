@@ -13,6 +13,7 @@ class avito_product{
     public $area = null;  //recommander AREA IDS
     public $itemcondition = 0; // par défaut 0 pour article neuf
     public $images = array(); // tableau des url des images if supérieur à 8 les 8 premiers seront chargé
+    public $description=""; // description du produit
 
 
   //  public $sku; // sku ou ugs de l'article
