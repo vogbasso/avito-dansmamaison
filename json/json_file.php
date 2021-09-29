@@ -6,5 +6,9 @@ $fichierJson = fopen("mamaison.json","w") or die("Impossible de trouver ce fichi
 fwrite($fichierJson,$jso);
 fclose($fichierJson);
 
+$fichierJson = fopen("/var/www/html/mamaison.json","w") or die("Impossible de trouver ce fichier");
+fwrite($fichierJson,$jso);
+fclose($fichierJson);
+
 echo "on est dans le fichier de gestion du file avito";
 ?>

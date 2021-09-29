@@ -5,7 +5,7 @@ echo "Json file \n";
 $jso = json_encode($listproducts, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 echo json_last_error_msg();
 echo "LA PARTIE DU JSON \n";
-var_dump($jso);
+//var_dump($jso);
 
 require('json_file.php');
 
