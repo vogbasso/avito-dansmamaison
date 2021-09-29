@@ -7,10 +7,13 @@ $fichierJson = fopen("mamaison.json","w") or die("Impossible de trouver ce fichi
 fwrite($fichierJson,$jso);
 fclose($fichierJson);
 
-// JSON SUR LE SERVEUR APACHCE DANS LE DOSSIER HTML
+
+
+/*** définissez le chemin de la création du fichier JSON***/
+// JSON SUR LE SERVEUR APACHE DANS LE DOSSIER HTML
 $fichierJson = fopen("/var/www/html/mamaison.json","w") or die("Impossible de trouver ce fichier");
 fwrite($fichierJson,$jso);
 fclose($fichierJson);
 
-echo "FIN DU FICHIER JSON_FILE \n";
+echo "FIN DU PROGRAME : json_file.php \n";
 ?>

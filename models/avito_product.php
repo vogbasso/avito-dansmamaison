@@ -2,6 +2,7 @@
 class avito_product{
 
     // Propriété définissant le modèle de produit à envoyer sur Avito
+    
     public $id; //identifiant sku or ugs obligatoire
     public $title; //titre de l'article required max 50 caractères obligatoire
     public $published = true; //publier valeur par défaut TRUE
@@ -14,20 +15,8 @@ class avito_product{
     public $itemcondition = 0; // par défaut 0 pour article neuf
     public $images = array(); // tableau des url des images if supérieur à 8 les 8 premiers seront chargé
     public $description=""; // description du produit
-
-
-  //  public $sku; // sku ou ugs de l'article
-   // public $category; // seulement la catéogie principale
-   // public $tagsList; // la liste des étiquettes du produits pour mieux le référencer
-   // public $description;
-   // public $resume;
-   // public $product_url;
-   // public $product_imageLink; //
-   // public $product_imageLinkS; //
 }
-echo "Avito product models \n";
-//$avito_product = new avito_produit_model();
 
-//$avito_product['title_product'] = "Hamza mon bébé";
-//var_dump(new avito_produit());
+echo "Avito product models Class : avito_product.php \n";
+
 ?>

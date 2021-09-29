@@ -1,8 +1,15 @@
 <?php
+echo "DEBUT DU FICHIER DES REQUETES : mysql_request.php \n";
+
+//importation du fichier des functions servant à raccourcir les requêtes 
+require('mysql_request_functions.php');
 
 
+// TABLEAU LISTES DES OBJETS PRODUITS AVITO 
 $listproducts = array();
-/*** PREMIERE REQUETE Récupérera la liste des produits ***/
+
+
+/*** PREMIERE REQUETE Récupère la liste des produits ***/
 
 $req = $conn->prepare("select * from wp_wc_product_meta_lookup wwpml inner join wp_posts wp on wwpml.product_id = wp.ID where wwpml.sku <> '' and wwpml.sku is not null and wp.post_status = 'publish' limit 100;");
 //$req = $conn->prepare("select wp_posts.ID, wp_posts.post_title, wp_pos from wp_posts where wp_posts.post_type='product' or wp_posts.post_type='product_variation' order by wp_posts.ID limit 10;");
@@ -18,7 +25,7 @@ while($donne = $req->fetch()){
    $avitoProduct->id = $donne['sku']; //sku à la place de ID pour AVITO
    $avitoProduct->title = $donne['post_title']; //Titre pour post_title pour Avito utf8_encode($donne['post_title']);
    $avitoProduct->price = (int) min($donne['min_price'],$donne['max_price']);
-   //$avitoProduct->description = (string) $donne['post_content'];
+   $avitoProduct->description = (string) $donne['post_content'];
    //echo "Voici la valeur de publish ".$donne['post_status'];
    $avitoProduct->published = $donne['post_status'] == 'publish' ? true : false;
 
@@ -40,12 +47,48 @@ while($donne = $req->fetch()){
             $req3->execute(array("identifiant_thumbnail"=>$identifiant_thumbnail));
                while($guid_url = $req3->fetch()){
                   if($guid_url['guid']){
-                     echo $guid_url['guid']."\n";
+              //       echo $guid_url['guid']."\n";
                      array_push($avitoProduct->images,array("url1"=>$guid_url['guid']));
                   }
                }
 
-            echo $url_images['meta_key']."et la valeur ".$url_images['meta_value']." \n" ;
+            //echo $url_images['meta_key']."et la valeur ".$url_images['meta_value']." \n" ;
+        }elseif($url_images['meta_key'] and $url_images['meta_key']=='_product_image_gallery'){
+           //echo "produit galerie disponilvle \n";
+
+           $id_product_image_gallery = explode (",",$url_images['meta_value']);
+          // print_r ($id_product_image_gallery);
+
+           //$length = sizeof($id_product_image_gallery);
+           $i = 2;
+           foreach($id_product_image_gallery as $id_product){
+            //echo "Image product id : $id_product \3";
+            $req4 = $conn->prepare("select guid from wp_posts wp where wp.ID = :id_product_image;");
+            $req4->execute(array("id_product_image"=>$id_product));
+              //print_r($req4);
+            
+              while($guid_url = $req4->fetch()){
+                // echo "La valeur du l'url pour l'id : $id_product et son url : ".$guid_url['guid']."\n";
+                if($guid_url['guid']){
+
+                  array_push($avitoProduct->images,array("url$i"=>$guid_url['guid']));
+
+                }
+                $i = $i+1;
+              }
+           }
+           //echo "Longueur de l'array : $length \n";
+           
+           
+           //   while($guid_url = $req4->fetch()){
+                 //if($guid_url['guid']){
+                 //   echo $guid_url['guid']."\n";
+                 //   array_push($avitoProduct->images,array("url1"=>$guid_url['guid']));
+                // }
+            //  }
+
+          // echo $url_images['meta_key']."et la valeur ".$url_images['meta_value']." \n" ;
+
         }
 //         }else{
 
@@ -71,7 +114,7 @@ while($donne = $req->fetch()){
     // echo $donne['0']."\n";
 };
 
-echo "étape \n";
+//echo "étape \n";
 //print_r($listproducts);
 
 

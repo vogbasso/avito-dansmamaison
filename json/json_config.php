@@ -12,11 +12,11 @@ echo "Début du Fichier JSON_CONFIG \n";
 $jso = json_encode($listproducts, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 
 // Affichage des erreurs liéé à l'encodage JSONs
-echo json_last_error_msg();
+echo "ERREUR JSON ENCODAGE : ".json_last_error_msg()."\n";
 
 //var_dump($jso);
 
-echo "Fin du fichier JSON_CONFIG";
+echo "Fin du fichier JSON_CONFIG \n";
 
 require('json_file.php');
 
