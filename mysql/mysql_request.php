@@ -10,17 +10,17 @@ $listproducts = array();
 
 
 /*** PREMIERE REQUETE Récupère la liste des produits ***/
-
-$req = $conn->prepare("select * from wp_wc_product_meta_lookup wwpml inner join wp_posts wp on wwpml.product_id = wp.ID where wwpml.sku <> '' and wwpml.sku is not null and wp.post_status = 'publish' limit 100;");
+//requi = "select * from wp_wc_product_meta_lookup wwpml inner join wp_posts wp on wwpml.product_id = wp.ID where wwpml.sku <> '' and wwpml.sku is not null and wp.post_status = 'publish' limit 10;";
+$req = $conn->prepare("select * from wp_wc_product_meta_lookup wwpml inner join wp_posts wp on wwpml.product_id = wp.ID where wwpml.sku <> '' and wwpml.sku is not null and wp.post_status = 'publish' limit 10;");
 //$req = $conn->prepare("select wp_posts.ID, wp_posts.post_title, wp_pos from wp_posts where wp_posts.post_type='product' or wp_posts.post_type='product_variation' order by wp_posts.ID limit 10;");
 //$reponse = $conn->query('select wp_posts.ID,wp_post_skr from wp_posts,wp_wc_product_meta_lookup AS wc_product where wp_posts.ID = wc_product.product_ID limit 20');
 $req->execute();
-
-print_r($req);
+//$req = avito_request($requi,$conn);
+//print_r($req);
 /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA BASE DE DONNER ***/
 while($donne = $req->fetch()){
    $id_produit = $donne['ID'];
-   echo "l'identifiant du produit $id_produit \n";
+   //echo "l'identifiant du produit $id_produit \n";
    $avitoProduct = new avito_product();
    $avitoProduct->id = $donne['sku']; //sku à la place de ID pour AVITO
    $avitoProduct->title = $donne['post_title']; //Titre pour post_title pour Avito utf8_encode($donne['post_title']);
