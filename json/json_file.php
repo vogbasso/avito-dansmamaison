@@ -11,7 +11,7 @@ fclose($fichierJson);
 
 /*** définissez le chemin de la création du fichier JSON***/
 // JSON SUR LE SERVEUR APACHE DANS LE DOSSIER HTML
-$fichierJson = fopen("/var/www/html/mamaison.json","w") or die("Impossible de trouver ce fichier");
+$fichierJson = fopen("/var/www/html/avitomamaison.json","w") or die("Impossible de trouver ce fichier");
 fwrite($fichierJson,$jso);
 fclose($fichierJson);
 
