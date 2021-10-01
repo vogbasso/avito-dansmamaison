@@ -13,9 +13,9 @@ class avito_product{
     public $phone = "0520163443"; // téléphone du shop par défaut;
     public $city = 5; //par défaut casablanca code 5
     public $area = null;  //recommander AREA IDS
-    public $itemcondition = 0; // par défaut 0 pour article neuf
+    public $itemCondition = 0; // par défaut 0 pour article neuf
     public $images = array(); // tableau des url des images if supérieur à 8 les 8 premiers seront chargé
-    public $inStockStatus;
+    //public $inStockStatus;
     
     public $delivery = true; //option de livraison par défaut à true;
 }

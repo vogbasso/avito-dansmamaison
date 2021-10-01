@@ -36,7 +36,7 @@ while($donne = $req->fetch()){ /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA B
 
    $avitoProduct->published = $donne['post_status'] == 'publish' ? true : false; /// définir le status a publié ou non
 
-   $avitoProduct->inStockStatus = $donne['stock_status'] == 'instock' ? true : false; // définir le status du stock en Stock True, outofstock false 
+   //$avitoProduct->inStockStatus = $donne['stock_status'] == 'instock' ? true : false; // définir le status du stock en Stock True, outofstock false 
 
    /***  Début de la  deuxième requête dans le but d'utiliser l'id pour récupérer cette informations ***/
    $req2 = $conn->prepare("select wp.post_id, wp.meta_key, wp.meta_value from wp_postmeta wp where (wp.meta_key = '_thumbnail_id' or wp.meta_key = '_product_image_gallery') and wp.post_id = :identifiant order by wp.meta_key desc limit 10;");
@@ -54,7 +54,7 @@ while($donne = $req->fetch()){ /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA B
          $req3->execute(array("identifiant_thumbnail"=>$identifiant_thumbnail));
          
          while($guid_url = $req3->fetch()){
-            array_push($avitoProduct->images,array("url1"=>$guid_url['guid']));
+            array_push($avitoProduct->images,$guid_url['guid']);
          }
       }elseif($url_images['meta_key']=='_product_image_gallery'){
          $id_product_image_gallery = explode(",",$url_images['meta_value']);
@@ -64,7 +64,7 @@ while($donne = $req->fetch()){ /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA B
             $req4->execute(array("id_product_image"=>$id_gallery));
             while($guid_url = $req4->fetch()){
                if($guid_url['guid']){
-                  array_push($avitoProduct->images,array("url$i"=>$guid_url['guid']));
+                  array_push($avitoProduct->images,$guid_url['guid']);
                }
                $i = $i+1;
             }
