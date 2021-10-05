@@ -32,7 +32,7 @@ while($donne = $req->fetch()){ /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA B
    
    $avitoProduct->price = (int) min($donne['min_price'],$donne['max_price']); // prix de vente est le prix minimum entre le prix max et le prix min
    
-   $avitoProduct->description = (string) $donne['post_content']; // s'assurer que c'est converti en chaîne de caractère
+   $avitoProduct->description = retire_url_description((string) $donne['post_content']); // s'assurer que c'est converti en chaîne de caractère
 
    $avitoProduct->published = $donne['post_status'] == 'publish' ? true : false; /// définir le status a publié ou non
 
