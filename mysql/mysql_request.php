@@ -30,12 +30,15 @@ while($donne = $req->fetch()){ /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA B
    
    $avitoProduct->title = $donne['post_title']; //Titre pour post_title pour Avito utf8_encode($donne['post_title']);
    
-   $avitoProduct->price = (int) min($donne['min_price'],$donne['max_price']); // prix de vente est le prix minimum entre le prix max et le prix min
+
+   $prix_de_vente = prix_min_vente($donne['min_price'],$donne['max_price']); // prix de vente est le prix minimum entre le prix max et le prix min
+   $avitoProduct->price = $prix_de_vente; // ajout de prix de vente dans le modèle
    
    $avitoProduct->description = retire_url_description((string) $donne['post_content']); // s'assurer que c'est converti en chaîne de caractère
 
    $avitoProduct->published = $donne['post_status'] == 'publish' ? true : false; /// définir le status a publié ou non
 
+   $avitoProduct->delivery = livraison_gratuite($prix_de_vente); // definir le statut de delivery a true ou false
    //$avitoProduct->inStockStatus = $donne['stock_status'] == 'instock' ? true : false; // définir le status du stock en Stock True, outofstock false 
 
    /***  Début de la  deuxième requête dans le but d'utiliser l'id pour récupérer cette informations ***/
