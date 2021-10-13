@@ -7,4 +7,8 @@ function retire_url_description ($description){
     return strip_tags($description);
 }
 
+function remplace_point($ID_A_TRAITER){
+    $id_traiter = str_replace('.','-',$ID_A_TRAITER);
+    return $id_traiter;
+}
 ?>

@@ -26,7 +26,7 @@ while($donne = $req->fetch()){ /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA B
    
    $avitoProduct = new avito_product(); // instantiation d'une variable Avito product
 
-   $avitoProduct->id = $donne['sku']; //sku à la place de ID pour AVITO
+   $avitoProduct->id = remplace_point($donne['sku']); //sku à la place de ID pour AVITO
    
    $avitoProduct->title = $donne['post_title']; //Titre pour post_title pour Avito utf8_encode($donne['post_title']);
    
