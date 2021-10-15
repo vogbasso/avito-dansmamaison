@@ -35,7 +35,7 @@ while($donne = $req->fetch()){ /*** BOUCLE POUR APPLER TOUS LES PRODUITS DE LA B
    $avitoProduct->price = $prix_de_vente; // ajout de prix de vente dans le modèle
    
    $avitoProduct->description = traitement_description($donne['post_content'],$donne['post_parent']);
-   $avitoProduct->published = $donne['post_status'] == 'publish' ? true : false; /// définir le status a publié ou non
+   $avitoProduct->published = ($donne['post_status'] == 'publish') && (0 < (int) $donne['stock_quantity'] ) ? true : false; /// définir le status a publié ou non
 
    $avitoProduct->delivery = livraison_gratuite($prix_de_vente); // definir le statut de delivery a true ou false
    //$avitoProduct->inStockStatus = $donne['stock_status'] == 'instock' ? true : false; // définir le status du stock en Stock True, outofstock false 
